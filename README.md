@@ -1,8 +1,17 @@
 # Music platform app
 
-## Technologies
+## Technologies:
 
 - TypeScript
+
+### Backend:
+
 - Nest.js
+- MongoDB
+
+### Frontend:
+
 - Next.js
 - React
+- Redux
+- MUI
