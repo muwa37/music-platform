@@ -19,14 +19,19 @@ const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
 
   return (
     <Card className={styles.track} onClick={onCardClickHandler}>
-      <IconButton>{active ? <Pause /> : <PlayArrow />}</IconButton>
+      <IconButton onClick={e => e.stopPropagation()}>
+        {active ? <Pause /> : <PlayArrow />}
+      </IconButton>
       <img width={70} height={70} src={track.picture} />
       <Grid container direction='column' className={styles.info}>
         <h4>{track.name}</h4>
         <h5>{track.artist}</h5>
       </Grid>
       {active && <div>02:24 / 03:56</div>}
-      <IconButton className={styles.deleteBtn}>
+      <IconButton
+        className={styles.deleteBtn}
+        onClick={e => e.stopPropagation()}
+      >
         <Delete />
       </IconButton>
     </Card>
