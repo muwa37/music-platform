@@ -1,11 +1,11 @@
 import MainLayout from '../../layouts/MainLayout';
 
-const Albums = () => {
+const Create = () => {
   return (
     <MainLayout>
-      <h1>albums page</h1>
+      <h1>add track</h1>
     </MainLayout>
   );
 };
 
-export default Albums;
+export default Create;

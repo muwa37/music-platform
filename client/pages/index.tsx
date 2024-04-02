@@ -1,9 +1,8 @@
-import Navbar from '../components/Navbar';
+import MainLayout from '../layouts/MainLayout';
 
 const Index = () => {
   return (
-    <>
-      <Navbar />
+    <MainLayout>
       <div className='center'>
         <h1>welcome</h1>
         <h3>some sample tracks could be here...</h3>
@@ -20,7 +19,7 @@ const Index = () => {
           }
         `}
       </style>
-    </>
+    </MainLayout>
   );
 };
 
