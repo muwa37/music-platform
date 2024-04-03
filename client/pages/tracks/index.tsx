@@ -6,6 +6,7 @@ import { Track } from '../../types/track';
 
 const Tracks = () => {
   const router = useRouter();
+
   const tracks: Track[] = [
     {
       _id: '1',
