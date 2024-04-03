@@ -43,8 +43,8 @@ const Track = () => {
       <div>
         {track.comments.map(comment => {
           <div>
-            <h5>{comment.username}</h5>
-            <h5>{comment.text}</h5>
+            <h5>author: {comment.username}</h5>
+            <h5>comment: {comment.text}</h5>
           </div>;
         })}
       </div>
