@@ -6,6 +6,8 @@ import MainLayout from '../../layouts/MainLayout';
 
 const Create = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [cover, setCover] = useState(null);
+  const [audio, setAudio] = useState(null);
 
   const onPrevStepClickHandler = () => {
     setActiveStep(prev => prev - 1);
@@ -29,7 +31,16 @@ const Create = () => {
             />
           </Grid>
         )}
-        {activeStep === 1 && <FileUpload file={''} setFile={() => {}} />}
+        {activeStep === 1 && (
+          <FileUpload setFile={setCover} accept='image/*'>
+            <Button>load cover</Button>
+          </FileUpload>
+        )}
+        {activeStep === 2 && (
+          <FileUpload setFile={setAudio} accept='audio/*'>
+            <Button>load audio</Button>
+          </FileUpload>
+        )}
       </StepWrapper>
       <Grid container justifyContent='space-between'>
         <Button disabled={activeStep === 0} onClick={onPrevStepClickHandler}>
