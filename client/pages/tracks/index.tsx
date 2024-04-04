@@ -24,7 +24,7 @@ const Tracks = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout title={'track list - music platform'}>
       <Grid container justifyContent='center'>
         <Card style={{ width: 900 }}>
           <Box p={3}>

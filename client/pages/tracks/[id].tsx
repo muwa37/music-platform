@@ -34,7 +34,10 @@ const Track = ({ serverTrack }) => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout
+      title={'music platform - ' + track.name + ' - ' + track.artist}
+      keywords={track.artist + ', ' + track.name}
+    >
       <Button variant='outlined' onClick={onBackClickHandler}>
         go back
       </Button>
