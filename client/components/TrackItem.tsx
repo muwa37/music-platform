@@ -29,7 +29,11 @@ const TrackItem: FC<TrackItemProps> = ({ track, active = false }) => {
       <IconButton onClick={onTogglePlaybackHandler}>
         {active ? <Pause /> : <PlayArrow />}
       </IconButton>
-      <img width={70} height={70} src={track.picture} />
+      <img
+        width={70}
+        height={70}
+        src={'http://localhost:5000/' + track.picture}
+      />
       <Grid container direction='column' className={styles.info}>
         <h4>{track.name}</h4>
         <h5>{track.artist}</h5>

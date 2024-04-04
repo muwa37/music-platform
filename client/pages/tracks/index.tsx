@@ -1,44 +1,23 @@
 import { Box, Button, Card, Grid } from '@material-ui/core';
 import { useRouter } from 'next/navigation';
 import TrackList from '../../components/TrackList';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import MainLayout from '../../layouts/MainLayout';
-import { Track } from '../../types/track';
+import { NextThunkDispatch, wrapper } from '../../store';
+import { fetchTracks } from '../../store/action-creators/track';
 
 const Tracks = () => {
   const router = useRouter();
 
-  const tracks: Track[] = [
-    {
-      _id: '1',
-      name: 'sample track 1',
-      artist: 'sample artist 1',
-      text: 'sample song text 1',
-      listens: 4,
-      audio: '',
-      picture: '',
-      comments: [],
-    },
-    {
-      _id: '2',
-      name: 'sample track 2',
-      artist: 'sample artist 2',
-      text: 'sample song text 2',
-      listens: 4,
-      audio: '',
-      picture: '',
-      comments: [],
-    },
-    {
-      _id: '3',
-      name: 'sample track 3',
-      artist: 'sample artist 3',
-      text: 'sample song text 3',
-      listens: 4,
-      audio: '',
-      picture: '',
-      comments: [],
-    },
-  ];
+  const { tracks, error } = useTypedSelector(state => state.track);
+
+  if (error) {
+    return (
+      <MainLayout>
+        <h1>{error}</h1>
+      </MainLayout>
+    );
+  }
 
   const addHandler = () => {
     router.push('/tracks/create');
@@ -62,3 +41,10 @@ const Tracks = () => {
 };
 
 export default Tracks;
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  async ({ store }) => {
+    const dispatch = store.dispatch as NextThunkDispatch;
+    await dispatch(await fetchTracks());
+  }
+);
