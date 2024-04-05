@@ -1,15 +1,21 @@
-import { Box, Button, Card, Grid } from '@material-ui/core';
+import { Box, Button, Card, Grid, TextField } from '@material-ui/core';
 import { useRouter } from 'next/navigation';
+import { ChangeEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import TrackList from '../../components/TrackList';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import MainLayout from '../../layouts/MainLayout';
 import { NextThunkDispatch, wrapper } from '../../store';
-import { fetchTracks } from '../../store/action-creators/track';
+import { fetchTracks, searchTracks } from '../../store/action-creators/track';
 
 const Tracks = () => {
   const router = useRouter();
+  const dispatch = useDispatch() as NextThunkDispatch;
 
   const { tracks, error } = useTypedSelector(state => state.track);
+
+  const [query, setQuery] = useState<string>('');
+  const [timer, setTimer] = useState(null);
 
   if (error) {
     return (
@@ -22,6 +28,17 @@ const Tracks = () => {
   const addHandler = () => {
     router.push('/tracks/create');
   };
+  const onSearchChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    if (timer) {
+      clearTimeout(timer);
+    }
+    setTimer(
+      setTimeout(async () => {
+        await dispatch(await searchTracks(e.target.value));
+      }, 500)
+    );
+  };
 
   return (
     <MainLayout title={'track list - music platform'}>
@@ -33,6 +50,7 @@ const Tracks = () => {
               <Button onClick={addHandler}>add track</Button>
             </Grid>
           </Box>
+          <TextField fullWidth value={query} onChange={onSearchChangeHandler} />
           <TrackList tracks={tracks} />
         </Card>
       </Grid>
